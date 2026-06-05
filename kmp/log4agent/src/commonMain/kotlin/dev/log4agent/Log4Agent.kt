@@ -29,6 +29,7 @@ object Log4Agent {
     private var ownsClient: Boolean = true
     private var sessionId: String = newSessionId()
     private var sessionStarted: Boolean = false
+    private var sessionStarting: Boolean = false
     private var initialized: Boolean = false
 
     fun configure(config: Log4AgentConfig, force: Boolean = false) {
@@ -41,6 +42,7 @@ object Log4Agent {
         this.config = config
         sessionId = newSessionId()
         sessionStarted = false
+        sessionStarting = false
         if (!config.enabled || config.endpoint.isBlank()) {
             closeOwnedClient()
             client = null
@@ -152,9 +154,9 @@ object Log4Agent {
     @OptIn(ExperimentalTime::class)
     private fun startSession() {
         val current = config
-        if (sessionStarted || !current.enabled || current.endpoint.isBlank()) return
+        if (sessionStarted || sessionStarting || !current.enabled || current.endpoint.isBlank()) return
         val activeClient = client ?: return
-        sessionStarted = true
+        sessionStarting = true
         val payload = buildJsonObject {
             put("timestamp", Clock.System.now().toString())
             put("app", current.app)
@@ -162,15 +164,24 @@ object Log4Agent {
             put("sessionId", sessionId)
             put("platform", log4AgentPlatformName())
         }
+        val endpoint = sessionEndpoint(current.endpoint)
+        reportLog4AgentQueued("app.session", endpoint)
         scope.launch {
             runCatching {
-                activeClient.post(sessionEndpoint(current.endpoint)) {
+                val response = activeClient.post(endpoint) {
                     headers {
                         append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
                     }
                     setBody(json.encodeToString(JsonObject.serializer(), payload))
                 }
+                reportLog4AgentResult("app.session", response.status.value)
+                if (response.status.value in 200..299) {
+                    sessionStarted = true
+                } else {
+                    sessionStarting = false
+                }
             }.onFailure { error ->
+                sessionStarting = false
                 reportLog4AgentFailure(error.message ?: error::class.simpleName ?: "unknown")
             }
         }
