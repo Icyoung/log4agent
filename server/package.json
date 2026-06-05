@@ -1,6 +1,6 @@
 {
   "name": "log4agent-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Local mobile log collector for coding agents.",
   "type": "module",
   "main": "src/server.js",
@@ -18,6 +18,24 @@
   "engines": {
     "node": ">=18"
   },
+  "keywords": [
+    "mobile",
+    "logging",
+    "android",
+    "ios",
+    "flutter",
+    "kmp",
+    "coding-agent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Icyoung/log4agent.git",
+    "directory": "server"
+  },
+  "bugs": {
+    "url": "https://github.com/Icyoung/log4agent/issues"
+  },
+  "homepage": "https://github.com/Icyoung/log4agent#readme",
   "publishConfig": {
     "access": "public"
   },
