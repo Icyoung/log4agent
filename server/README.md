@@ -31,7 +31,7 @@ log4agent-server status
 log4agent-server stop
 ```
 
-By default, logs are written to `.hostlogs` under the terminal working directory.
+By default, logs are written to `.log4agent` under the terminal working directory.
 
 ## Client Defaults
 
@@ -54,7 +54,7 @@ Mobile clients should post logs to:
 Logs are stored as JSONL:
 
 ```text
-.hostlogs/
+.log4agent/
   2026-06-05/
     pixel_8/
       1749100000000-abcd.session.jsonl
@@ -68,14 +68,14 @@ Each log entry includes `app`, `deviceId`, and `sessionId`. A session is created
 CLI options:
 
 ```bash
-log4agent-server start --port 3100 --dir .hostlogs
+log4agent-server start --port 3100 --dir .log4agent
 log4agent-server start --background --no-redact
 ```
 
 Environment variables:
 
 - `LOG4AGENT_PORT`: server port, default `3100`
-- `LOG4AGENT_DIR`: output directory, default `.hostlogs`
+- `LOG4AGENT_DIR`: output directory, default `.log4agent`
 - `LOG4AGENT_REDACT`: set to `false` to disable server-side redaction
 - `LOG4AGENT_PID_FILE`: optional background pid file
 - `LOG4AGENT_OUT_FILE`: optional background stdout/stderr file
@@ -89,7 +89,7 @@ log4agent-server start --background
 curl "http://127.0.0.1:3100/logs?tail=200"
 ```
 
-Then inspect `.hostlogs` or query `/logs` to correlate logs with the reproduced action.
+Then inspect `.log4agent` or query `/logs` to correlate logs with the reproduced action.
 
 ## Repository
 

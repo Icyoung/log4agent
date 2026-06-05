@@ -1,6 +1,6 @@
 {
   "name": "log4agent-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Local mobile log collector for coding agents.",
   "type": "module",
   "main": "src/server.js",

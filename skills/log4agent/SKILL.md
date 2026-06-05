@@ -26,7 +26,7 @@ log4agent-server status
 log4agent-server stop
 ```
 
-Default storage is `.hostlogs` under the terminal working directory. Use `--dir <path>` only when the user intentionally wants a different log root.
+Default storage is `.log4agent` under the terminal working directory. Use `--dir <path>` only when the user intentionally wants a different log root.
 
 Server endpoints:
 
@@ -45,7 +45,7 @@ Server endpoints:
 Clients generate a session when configured, call `/sessions` once, then attach `app`, `deviceId`, and `sessionId` to each log. The server stores logs as:
 
 ```text
-.hostlogs/
+.log4agent/
   YYYY-MM-DD/
     <deviceId>/
       <sessionId>.session.jsonl
@@ -116,24 +116,24 @@ Log4Agent.info('app.start', 'Flutter app started');
 
 ## Inspect Logs
 
-When asked to view logs, first identify the log root. Default is `.hostlogs` in the directory where `log4agent-server` was started.
+When asked to view logs, first identify the log root. Default is `.log4agent` in the directory where `log4agent-server` was started.
 
 Find sessions:
 
 ```bash
-find .hostlogs -name '*.session.jsonl' -print
+find .log4agent -name '*.session.jsonl' -print
 ```
 
 List recent log files:
 
 ```bash
-find .hostlogs -name '*.jsonl' ! -name '*.session.jsonl' -print
+find .log4agent -name '*.jsonl' ! -name '*.session.jsonl' -print
 ```
 
 Tail latest logs:
 
 ```bash
-tail -100 .hostlogs/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl
+tail -100 .log4agent/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl
 ```
 
 Query server if it is running:

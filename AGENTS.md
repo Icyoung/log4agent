@@ -14,8 +14,8 @@ Operational defaults:
 
 - Server npm package: `log4agent-server`
 - Default port: `3100`
-- Default log directory: `.hostlogs` under the terminal working directory
+- Default log directory: `.log4agent` under the terminal working directory
 - Android emulator endpoint: `http://10.0.2.2:3100/logs`
 - iOS simulator endpoint: `http://127.0.0.1:3100/logs`
 
-When debugging a mobile issue, prefer session-scoped logs under `.hostlogs/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl`.
+When debugging a mobile issue, prefer session-scoped logs under `.log4agent/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl`.

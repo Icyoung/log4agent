@@ -5,7 +5,7 @@ import { redactLogEntry } from "./redactor.js";
 
 export function startServer(options = {}) {
   const port = Number(options.port || 3100);
-  const logDir = path.resolve(options.logDir || ".hostlogs");
+  const logDir = path.resolve(options.logDir || ".log4agent");
   const redactionEnabled = options.redactionEnabled !== false;
   const printLogs = options.printLogs !== false;
 
@@ -68,7 +68,7 @@ export function startServer(options = {}) {
 }
 
 function dayDir(logDir) {
-  const day = new Date().toISOString().slice(0, 10);
+  const day = formatLocalDate(new Date());
   return path.join(logDir, day);
 }
 
@@ -116,7 +116,7 @@ function readBody(req, limitBytes = 1024 * 1024) {
 function normalizeLog(raw, req) {
   const parsed = raw.trim() ? JSON.parse(raw) : {};
   return {
-    receivedAt: new Date().toISOString(),
+    receivedAt: formatLocalIso(new Date()),
     remoteAddress: req.socket.remoteAddress,
     app: parsed.app || "log4agent",
     deviceId: parsed.deviceId || parsed.platform || "unknown-device",
@@ -130,7 +130,7 @@ function normalizeSession(raw, req) {
   const sessionId = parsed.sessionId || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
   const deviceId = parsed.deviceId || parsed.platform || "unknown-device";
   return {
-    receivedAt: new Date().toISOString(),
+    receivedAt: formatLocalIso(new Date()),
     remoteAddress: req.socket.remoteAddress,
     type: "session",
     app: parsed.app || "log4agent",
@@ -138,6 +138,37 @@ function normalizeSession(raw, req) {
     sessionId,
     ...parsed,
   };
+}
+
+export function formatLocalDate(date) {
+  return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
+}
+
+export function formatLocalIso(date) {
+  const offsetMinutes = -date.getTimezoneOffset();
+  const sign = offsetMinutes >= 0 ? "+" : "-";
+  const absoluteOffset = Math.abs(offsetMinutes);
+  const offset = `${sign}${pad2(Math.floor(absoluteOffset / 60))}:${pad2(absoluteOffset % 60)}`;
+  return [
+    formatLocalDate(date),
+    "T",
+    pad2(date.getHours()),
+    ":",
+    pad2(date.getMinutes()),
+    ":",
+    pad2(date.getSeconds()),
+    ".",
+    pad3(date.getMilliseconds()),
+    offset,
+  ].join("");
+}
+
+function pad2(value) {
+  return String(value).padStart(2, "0");
+}
+
+function pad3(value) {
+  return String(value).padStart(3, "0");
 }
 
 function resolveLogFiles(logDir, deviceId, sessionId) {

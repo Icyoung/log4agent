@@ -90,7 +90,7 @@ npm run stop
 Environment variables:
 
 - `LOG4AGENT_PORT`: server port, default `3100`
-- `LOG4AGENT_DIR`: JSONL output directory, default `.hostlogs` under the terminal working directory
+- `LOG4AGENT_DIR`: JSONL output directory, default `.log4agent` under the terminal working directory
 - `LOG4AGENT_REDACT`: set to `false` to disable server-side redaction
 - `LOG4AGENT_PID_FILE`: optional background pid file
 - `LOG4AGENT_OUT_FILE`: optional background stdout/stderr file
@@ -106,7 +106,7 @@ Endpoints:
 Storage layout:
 
 ```text
-.hostlogs/
+.log4agent/
   2026-06-05/
     pixel_8/
       1749100000000-abcd.session.jsonl
@@ -295,7 +295,7 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 
 Or install it into an agent skill directory by copying or symlinking that folder, then invoke it as
 `$log4agent`. The skill explains how agents should start the local server, integrate SDKs, and inspect
-`.hostlogs/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl` logs.
+`.log4agent/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl` logs.
 
 Codex skill path example:
 
@@ -311,7 +311,7 @@ ln -s /path/to/Log4Agent/skills/log4agent ~/.agents/skills/log4agent
 
 ## Inspect Logs
 
-The default log directory is `.hostlogs` under the directory where `log4agent-server` was started.
+The default log directory is `.log4agent` under the directory where `log4agent-server` was started.
 
 Check server status:
 
@@ -323,19 +323,19 @@ curl -sS http://127.0.0.1:3100/health
 Find sessions:
 
 ```bash
-find .hostlogs -name '*.session.jsonl' -print
+find .log4agent -name '*.session.jsonl' -print
 ```
 
 Find log files:
 
 ```bash
-find .hostlogs -name '*.jsonl' ! -name '*.session.jsonl' -print
+find .log4agent -name '*.jsonl' ! -name '*.session.jsonl' -print
 ```
 
 Tail the latest logs for one session:
 
 ```bash
-tail -100 .hostlogs/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl
+tail -100 .log4agent/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl
 ```
 
 Query through the server:

@@ -20,7 +20,7 @@ function hasFlag(name) {
 }
 
 function optionsFromArgs() {
-  const logDir = valueAfter("--dir", process.env.LOG4AGENT_DIR || ".hostlogs");
+  const logDir = valueAfter("--dir", process.env.LOG4AGENT_DIR || ".log4agent");
   return {
     port: Number(valueAfter("--port", process.env.LOG4AGENT_PORT || process.env.PORT || 3100)),
     logDir,
@@ -137,7 +137,7 @@ function isRunning(pid) {
 
 function printHelpAndExit() {
   console.error(`Usage:
-  log4agent-server start [--background] [--port 3100] [--dir .hostlogs]
+  log4agent-server start [--background] [--port 3100] [--dir .log4agent]
   log4agent-server stop
   log4agent-server status`);
   process.exit(1);
