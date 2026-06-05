@@ -18,8 +18,11 @@ object Log4Agent {
     private var client = OkHttpClient()
     private var sessionId = UUID.randomUUID().toString()
     private var sessionStarted = false
+    private var initialized = false
 
-    fun configure(config: Log4AgentConfig = Log4AgentConfig(), okHttpClient: OkHttpClient? = null) {
+    fun configure(config: Log4AgentConfig = Log4AgentConfig(), okHttpClient: OkHttpClient? = null, force: Boolean = false) {
+        if (initialized && !force) return
+        initialized = true
         this.config = config
         sessionId = UUID.randomUUID().toString()
         sessionStarted = false

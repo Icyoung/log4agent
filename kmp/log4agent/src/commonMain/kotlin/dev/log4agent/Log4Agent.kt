@@ -29,12 +29,15 @@ object Log4Agent {
     private var ownsClient: Boolean = true
     private var sessionId: String = newSessionId()
     private var sessionStarted: Boolean = false
+    private var initialized: Boolean = false
 
-    fun configure(config: Log4AgentConfig) {
-        configure(config = config, httpClient = null)
+    fun configure(config: Log4AgentConfig, force: Boolean = false) {
+        configure(config = config, httpClient = null, force = force)
     }
 
-    fun configure(config: Log4AgentConfig, httpClient: HttpClient?) {
+    fun configure(config: Log4AgentConfig, httpClient: HttpClient?, force: Boolean = false) {
+        if (initialized && !force) return
+        initialized = true
         this.config = config
         sessionId = newSessionId()
         sessionStarted = false
@@ -56,6 +59,7 @@ object Log4Agent {
         enabled: Boolean = true,
         redactionEnabled: Boolean = true,
         httpClient: HttpClient? = null,
+        force: Boolean = false,
     ) {
         configure(
             config = Log4AgentConfig(
@@ -64,6 +68,7 @@ object Log4Agent {
                 redactionEnabled = redactionEnabled,
             ),
             httpClient = httpClient,
+            force = force,
         )
     }
 

@@ -8,10 +8,13 @@ public final class Log4Agent {
     private let encoder = JSONEncoder()
     private var sessionId = UUID().uuidString
     private var sessionStarted = false
+    private var initialized = false
 
     public init() {}
 
-    public func configure(_ config: Log4AgentConfig = Log4AgentConfig(), session: URLSession = .shared) {
+    public func configure(_ config: Log4AgentConfig = Log4AgentConfig(), session: URLSession = .shared, force: Bool = false) {
+        if initialized && !force { return }
+        initialized = true
         self.config = config
         self.session = session
         self.sessionId = UUID().uuidString

@@ -117,6 +117,10 @@ Clients generate a session id when `Log4Agent.configure(...)` runs and perform o
 handshake for that initialization. Every log line carries `app`, `deviceId`, and `sessionId`, so the
 server can route logs by device and session even if the first log arrives before the handshake record.
 
+Client SDK `configure(...)` calls are idempotent. Repeated calls in the same process keep the existing
+session and do not send another `/sessions` handshake. Pass `force = true` when a caller intentionally
+wants to replace the config and start a new session.
+
 ## KMP Client
 
 Use GitHub Packages:

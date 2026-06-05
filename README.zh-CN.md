@@ -115,6 +115,8 @@ npm run stop
 
 客户端在 `Log4Agent.configure(...)` 时生成 session id，并对 `/sessions` 做一次握手。每条日志都会带 `app`、`deviceId`、`sessionId`，所以即使第一条日志比握手记录先到，server 也可以按设备和 session 路由日志。
 
+各端 SDK 的 `configure(...)` 都是幂等的。同一进程里重复调用会复用已有 session，不会再次发送 `/sessions` 握手。调用方确实需要替换配置并开启新 session 时，可以传 `force = true`。
+
 ## KMP 集成
 
 通过 GitHub Packages：

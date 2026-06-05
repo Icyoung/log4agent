@@ -16,37 +16,58 @@ class Log4Agent {
   static Log4AgentTransport _transport = Log4AgentHttpTransport();
   static String _sessionId = _newSessionId();
   static bool _sessionStarted = false;
+  static bool _initialized = false;
 
   static void configure({
     Log4AgentConfig config = const Log4AgentConfig(),
     http.Client? client,
     Dio? dio,
     Log4AgentTransport? transport,
+    bool force = false,
   }) {
+    if (_initialized && !force) return;
+    _initialized = true;
     _config = config;
     _sessionId = _newSessionId();
     _sessionStarted = false;
     _transport.close();
-    _transport = transport ??
+    _transport =
+        transport ??
         (dio != null
             ? Log4AgentDioTransport(dio)
             : Log4AgentHttpTransport(client));
     _startSession();
   }
 
-  static void debug(String category, String message, {Map<String, String> attributes = const {}}) {
+  static void debug(
+    String category,
+    String message, {
+    Map<String, String> attributes = const {},
+  }) {
     log(category, message, level: Log4AgentLevel.debug, attributes: attributes);
   }
 
-  static void info(String category, String message, {Map<String, String> attributes = const {}}) {
+  static void info(
+    String category,
+    String message, {
+    Map<String, String> attributes = const {},
+  }) {
     log(category, message, level: Log4AgentLevel.info, attributes: attributes);
   }
 
-  static void warn(String category, String message, {Map<String, String> attributes = const {}}) {
+  static void warn(
+    String category,
+    String message, {
+    Map<String, String> attributes = const {},
+  }) {
     log(category, message, level: Log4AgentLevel.warn, attributes: attributes);
   }
 
-  static void error(String category, String message, {Map<String, String> attributes = const {}}) {
+  static void error(
+    String category,
+    String message, {
+    Map<String, String> attributes = const {},
+  }) {
     log(category, message, level: Log4AgentLevel.error, attributes: attributes);
   }
 
@@ -63,7 +84,10 @@ class Log4Agent {
         ? Log4AgentRedactor.redactUrl(message, keys: current.redactionKeys)
         : message;
     final safeAttributes = current.redactionEnabled
-        ? Log4AgentRedactor.redactAttributes(attributes, keys: current.redactionKeys)
+        ? Log4AgentRedactor.redactAttributes(
+            attributes,
+            keys: current.redactionKeys,
+          )
         : attributes;
     final payload = jsonEncode({
       'timestamp': DateTime.now().toUtc().toIso8601String(),

@@ -44,6 +44,8 @@ Server endpoints:
 
 Clients generate a session when configured, call `/sessions` once, then attach `app`, `deviceId`, and `sessionId` to each log. The server stores logs as:
 
+Client SDK `configure(...)` calls are idempotent in one process. Repeated calls keep the existing session; use `force = true` only when intentionally starting a new session.
+
 ```text
 .log4agent/
   YYYY-MM-DD/
@@ -152,4 +154,3 @@ Prefer session-scoped logs when debugging a user action. Use broad `tail=100` on
 3. Find the newest `.session.jsonl` to identify device and session.
 4. Tail the matching `<sessionId>.jsonl`.
 5. If logs are missing, check whether `Log4Agent.configure(enabled = true, ...)` ran and whether the app can reach the host.
-
