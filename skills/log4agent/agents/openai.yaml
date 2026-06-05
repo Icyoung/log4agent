@@ -1,0 +1,8 @@
+interface:
+  display_name: "Log4Agent"
+  short_description: "Inspect mobile app logs by device/session"
+  default_prompt: "Use $log4agent to start the local log server, integrate the mobile SDK, and inspect the latest device/session logs."
+
+policy:
+  allow_implicit_invocation: true
+

@@ -1,0 +1,25 @@
+{
+  "name": "log4agent-server",
+  "version": "0.1.0",
+  "description": "Local mobile log collector for coding agents.",
+  "type": "module",
+  "main": "src/server.js",
+  "bin": {
+    "log4agent-server": "bin/log4agent-server.js"
+  },
+  "scripts": {
+    "start": "node bin/log4agent-server.js start",
+    "start:fg": "node bin/log4agent-server.js start",
+    "start:bg": "node bin/log4agent-server.js start --background",
+    "stop": "node bin/log4agent-server.js stop",
+    "status": "node bin/log4agent-server.js status",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT"
+}
