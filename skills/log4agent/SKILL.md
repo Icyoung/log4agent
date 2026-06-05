@@ -147,6 +147,40 @@ curl -sS 'http://127.0.0.1:3100/logs?deviceId=<deviceId>&sessionId=<sessionId>&t
 
 Prefer session-scoped logs when debugging a user action. Use broad `tail=100` only when device or session is unknown.
 
+## Copy Request Curl
+
+When the user asks for a reproducible request, prefer copying the curl command to the local clipboard instead of pasting sensitive values into chat. Mobile requests can contain real credentials even on test servers.
+
+If the app already logs complete curl commands, copy the latest matching curl directly from the session log. If the curl header log and request body are separate, reconstruct the command from the latest matching `REQUEST:` entry in the session JSONL.
+
+macOS clipboard:
+
+```bash
+<extract-curl-command> | pbcopy
+```
+
+Windows clipboard from PowerShell:
+
+```powershell
+<extract-curl-command> | Set-Clipboard
+```
+
+Windows clipboard from cmd:
+
+```cmd
+<extract-curl-command> | clip.exe
+```
+
+Linux clipboard depends on the desktop environment:
+
+```bash
+<extract-curl-command> | wl-copy
+# or
+<extract-curl-command> | xclip -selection clipboard
+```
+
+If no clipboard command is available, write the curl to a temporary local file and tell the user the path. Do not print credentials, tokens, passwords, verification codes, session cookies, or other secrets into chat unless the user explicitly accepts that exposure and the value is known to be disposable.
+
 ## Agent Debugging Checklist
 
 1. Confirm server status with `log4agent-server status` or `curl -sS http://127.0.0.1:3100/health`.
