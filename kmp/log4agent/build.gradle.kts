@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    id("com.android.library")
+    id("com.android.kotlin.multiplatform.library")
     id("maven-publish")
 }
 
@@ -14,8 +14,10 @@ val ktorVersion = "3.1.3"
 val coroutinesVersion = "1.10.2"
 
 kotlin {
-    androidTarget {
-        publishLibraryVariants("release")
+    androidLibrary {
+        namespace = "dev.log4agent"
+        compileSdk = 36
+        minSdk = 23
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
@@ -42,20 +44,6 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
             implementation("io.ktor:ktor-client-mock:$ktorVersion")
         }
-    }
-}
-
-android {
-    namespace = "dev.log4agent"
-    compileSdk = 36
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    defaultConfig {
-        minSdk = 23
     }
 }
 

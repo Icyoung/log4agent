@@ -21,7 +21,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - run: ./gradlew :log4agent:testDebugUnitTest
+      - run: ./gradlew :log4agent:compileAndroidMain :log4agent:iosSimulatorArm64Test
       - run: ./gradlew :log4agent:publishAllPublicationsToGitHubPackagesRepository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -41,4 +41,3 @@ jobs:
       - run: ./gradlew :log4agent:publishReleasePublicationToGitHubPackagesRepository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
