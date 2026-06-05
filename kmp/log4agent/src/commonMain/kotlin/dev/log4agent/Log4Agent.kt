@@ -25,7 +25,7 @@ object Log4Agent {
     private val json = Json { encodeDefaults = false }
 
     private var config: Log4AgentConfig = Log4AgentConfig()
-    private var client: HttpClient = newClient(config)
+    private var client: HttpClient? = null
     private var ownsClient: Boolean = true
     private var sessionId: String = newSessionId()
     private var sessionStarted: Boolean = false
@@ -41,6 +41,12 @@ object Log4Agent {
         this.config = config
         sessionId = newSessionId()
         sessionStarted = false
+        if (!config.enabled || config.endpoint.isBlank()) {
+            closeOwnedClient()
+            client = null
+            ownsClient = true
+            return
+        }
         if (httpClient != null) {
             closeOwnedClient()
             client = httpClient
@@ -101,6 +107,7 @@ object Log4Agent {
     fun log(event: Log4AgentEvent) {
         val current = config
         if (!current.enabled || current.endpoint.isBlank()) return
+        val activeClient = client ?: return
         startSession()
 
         val message = if (current.redactionEnabled) {
@@ -129,7 +136,7 @@ object Log4Agent {
         reportLog4AgentQueued(event.category, current.endpoint)
         scope.launch {
             runCatching {
-                val response = client.post(current.endpoint) {
+                val response = activeClient.post(current.endpoint) {
                     headers {
                         append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
                     }
@@ -146,6 +153,7 @@ object Log4Agent {
     private fun startSession() {
         val current = config
         if (sessionStarted || !current.enabled || current.endpoint.isBlank()) return
+        val activeClient = client ?: return
         sessionStarted = true
         val payload = buildJsonObject {
             put("timestamp", Clock.System.now().toString())
@@ -156,7 +164,7 @@ object Log4Agent {
         }
         scope.launch {
             runCatching {
-                client.post(sessionEndpoint(current.endpoint)) {
+                activeClient.post(sessionEndpoint(current.endpoint)) {
                     headers {
                         append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
                     }
@@ -187,6 +195,6 @@ object Log4Agent {
         }
 
     private fun closeOwnedClient() {
-        if (ownsClient) client.close()
+        if (ownsClient) client?.close()
     }
 }
