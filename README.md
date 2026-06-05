@@ -287,7 +287,13 @@ or `Log4AgentConfig.host(...)` when running on iOS simulator or a real device.
 
 This repo includes a standard skill at `skills/log4agent`.
 
-Install it into an agent skill directory by copying or symlinking that folder, then invoke it as
+Install it from GitHub:
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --url https://github.com/Icyoung/log4agent/tree/main/skills/log4agent
+```
+
+Or install it into an agent skill directory by copying or symlinking that folder, then invoke it as
 `$log4agent`. The skill explains how agents should start the local server, integrate SDKs, and inspect
 `.hostlogs/YYYY-MM-DD/<deviceId>/<sessionId>.jsonl` logs.
 
