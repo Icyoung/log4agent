@@ -96,15 +96,11 @@ Log4Agent.shared.configure(
 Log4Agent.shared.info("app.start", "Native iOS app started")
 ```
 
-Flutter via git dependency:
+Flutter via pub.dev:
 
 ```yaml
 dependencies:
-  log4agent:
-    git:
-      url: https://github.com/OWNER/Log4Agent.git
-      path: flutter
-      ref: <version>
+  log4agent: ^<version>
 ```
 
 ```dart

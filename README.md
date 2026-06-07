@@ -233,15 +233,11 @@ Default endpoint: `http://127.0.0.1:3100/logs`.
 
 ## Flutter Client
 
-Use a git dependency:
+Use pub.dev:
 
 ```yaml
 dependencies:
-  log4agent:
-    git:
-      url: https://github.com/OWNER/Log4Agent.git
-      path: flutter
-      ref: main
+  log4agent: ^0.1.0
 ```
 
 ```dart

@@ -227,15 +227,11 @@ Log4Agent.shared.info("app.start", "Native iOS app started")
 
 ## Flutter 集成
 
-通过 git dependency：
+通过 pub.dev：
 
 ```yaml
 dependencies:
-  log4agent:
-    git:
-      url: https://github.com/OWNER/Log4Agent.git
-      path: flutter
-      ref: main
+  log4agent: ^0.1.0
 ```
 
 使用 `package:http`：
