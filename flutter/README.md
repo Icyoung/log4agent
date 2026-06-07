@@ -1,6 +1,18 @@
 # log4agent
 
+[![KMP Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent?label=KMP%20Maven%20Central)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent)
+[![Android Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent-android-native?label=Android%20Maven%20Central)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent-android-native)
+[![Flutter pub.dev](https://img.shields.io/pub/v/log4agent?label=Flutter%20pub.dev)](https://pub.dev/packages/log4agent)
+[![npm server](https://img.shields.io/npm/v/log4agent-server?label=npm%20server)](https://www.npmjs.com/package/log4agent-server)
+
 Flutter client for Log4Agent, a local mobile log bridge that helps coding agents inspect app logs by device and session.
+
+## Packages
+
+- [KMP client: `io.github.icyoung:log4agent`](https://central.sonatype.com/artifact/io.github.icyoung/log4agent)
+- [Android native client: `io.github.icyoung:log4agent-android-native`](https://central.sonatype.com/artifact/io.github.icyoung/log4agent-android-native)
+- [Flutter client: `log4agent`](https://pub.dev/packages/log4agent)
+- [Local server: `log4agent-server`](https://www.npmjs.com/package/log4agent-server)
 
 ## Install
 

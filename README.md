@@ -2,6 +2,11 @@
 
 [中文文档](README.zh-CN.md)
 
+[![KMP Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent?label=KMP%20Maven%20Central)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent)
+[![Android Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent-android-native?label=Android%20Maven%20Central)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent-android-native)
+[![Flutter pub.dev](https://img.shields.io/pub/v/log4agent?label=Flutter%20pub.dev)](https://pub.dev/packages/log4agent)
+[![npm server](https://img.shields.io/npm/v/log4agent-server?label=npm%20server)](https://www.npmjs.com/package/log4agent-server)
+
 Log4Agent is a local logging toolkit for mobile debugging and coding agents. Mobile SDKs send structured logs to a local server on the developer machine; the server stores JSONL logs by device and session so agents can inspect Android, iOS, Flutter, and KMP runtime logs directly from the terminal.
 
 ## Why Log4Agent
@@ -30,11 +35,11 @@ Log4Agent provides that local observation surface. It does not replace productio
 
 It has these components:
 
-- `log4agent-server`: a Node.js server that runs on the developer machine and stores logs as JSONL.
-- `log4agent-kmp`: a Kotlin Multiplatform client.
-- `log4agent-android-native`: an Android native client.
+- [`log4agent-server`](https://www.npmjs.com/package/log4agent-server): a Node.js server that runs on the developer machine and stores logs as JSONL.
+- [`io.github.icyoung:log4agent`](https://central.sonatype.com/artifact/io.github.icyoung/log4agent): a Kotlin Multiplatform client.
+- [`io.github.icyoung:log4agent-android-native`](https://central.sonatype.com/artifact/io.github.icyoung/log4agent-android-native): an Android native client.
 - `Log4Agent` Swift Package: an iOS native client.
-- `log4agent` Flutter package: a Flutter client.
+- [`log4agent`](https://pub.dev/packages/log4agent): a Flutter client.
 
 ## Defaults
 
