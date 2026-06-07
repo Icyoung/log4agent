@@ -32,7 +32,7 @@ It has these components:
 
 - `log4agent-server`: a Node.js server that runs on the developer machine and stores logs as JSONL.
 - `log4agent-kmp`: a Kotlin Multiplatform client.
-- `log4agent-android`: an Android native client.
+- `log4agent-android-native`: an Android native client.
 - `Log4Agent` Swift Package: an iOS native client.
 - `log4agent` Flutter package: a Flutter client.
 
@@ -201,7 +201,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.icyoung:log4agent-android:0.1.0")
+    implementation("io.github.icyoung:log4agent-android-native:0.1.0")
 }
 ```
 

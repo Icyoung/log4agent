@@ -2,6 +2,16 @@ name: Publish Maven Central
 
 on:
   workflow_dispatch:
+    inputs:
+      component:
+        description: Component to publish
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - kmp
+          - android
   release:
     types: [published]
 
@@ -21,9 +31,11 @@ jobs:
           java-version: 17
 
       - name: Publish KMP to Maven Central
+        if: ${{ github.event_name == 'release' || inputs.component == 'all' || inputs.component == 'kmp' }}
         working-directory: kmp
         run: ./gradlew :log4agent:publishAndReleaseToMavenCentral --stacktrace
 
       - name: Publish Android to Maven Central
+        if: ${{ github.event_name == 'release' || inputs.component == 'all' || inputs.component == 'android' }}
         working-directory: android
         run: ./gradlew :log4agent:publishAndReleaseToMavenCentral --stacktrace

@@ -54,7 +54,7 @@ mavenPublishing {
 
     coordinates(
         groupId = "io.github.icyoung",
-        artifactId = "log4agent-android",
+        artifactId = "log4agent-android-native",
         version = "0.1.0",
     )
 

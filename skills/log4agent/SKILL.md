@@ -74,7 +74,7 @@ Android native:
 
 ```kotlin
 dependencies {
-    implementation("io.github.icyoung:log4agent-android:<version>")
+    implementation("io.github.icyoung:log4agent-android-native:<version>")
 }
 
 Log4Agent.configure(
