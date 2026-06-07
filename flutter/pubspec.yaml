@@ -1,6 +1,14 @@
 name: log4agent
 description: A local mobile log bridge that lets coding agents inspect Flutter app logs by device and session.
 version: 0.1.0
+homepage: https://github.com/Icyoung/log4agent
+repository: https://github.com/Icyoung/log4agent
+issue_tracker: https://github.com/Icyoung/log4agent/issues
+topics:
+  - logging
+  - mobile
+  - debugging
+  - agents
 
 environment:
   sdk: ^3.6.0

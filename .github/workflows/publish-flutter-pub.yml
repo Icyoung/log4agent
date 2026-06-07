@@ -1,0 +1,25 @@
+name: Publish Flutter to pub.dev
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flutter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - run: dart pub get
+      - run: dart analyze
+      - run: dart test
+      - run: dart pub publish --force

@@ -1,0 +1,72 @@
+# log4agent
+
+Flutter client for Log4Agent, a local mobile log bridge that helps coding agents inspect app logs by device and session.
+
+## Install
+
+```yaml
+dependencies:
+  log4agent: ^0.1.0
+```
+
+## Usage
+
+```dart
+import 'package:log4agent/log4agent.dart';
+
+void main() {
+  Log4Agent.configure(
+    config: const Log4AgentConfig(
+      app: 'my_flutter_app',
+      deviceId: 'pixel_8',
+    ),
+  );
+
+  Log4Agent.info('app.start', 'Flutter app started');
+}
+```
+
+Use an existing `package:http` client:
+
+```dart
+Log4Agent.configure(
+  config: const Log4AgentConfig(),
+  client: appHttpClient,
+);
+```
+
+Use Dio:
+
+```dart
+Log4Agent.configure(
+  config: const Log4AgentConfig(),
+  dio: appDio,
+);
+```
+
+## Endpoints
+
+Default endpoint:
+
+```text
+http://10.0.2.2:3100/logs
+```
+
+Use `Log4AgentEndpoint.defaultIosSimulator` for an iOS simulator, or configure a host for a real device:
+
+```dart
+Log4Agent.configure(
+  config: Log4AgentConfig.host('192.168.1.10'),
+);
+```
+
+## Server
+
+Run the local server on your development machine:
+
+```bash
+npm install -g log4agent-server
+log4agent-server start --background --port 3100
+```
+
+Logs are written to `.log4agent` under the directory where the server starts.
