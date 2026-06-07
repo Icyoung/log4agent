@@ -119,23 +119,16 @@ npm run stop
 
 ## KMP 集成
 
-通过 GitHub Packages：
+通过 Maven Central：
 
 ```kotlin
 repositories {
-    maven {
-        url = uri("https://maven.pkg.github.com/OWNER/Log4Agent")
-        credentials {
-            username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR")
-            password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN")
-        }
-    }
     google()
     mavenCentral()
 }
 
 commonMain.dependencies {
-    implementation("dev.log4agent:log4agent:0.1.0-SNAPSHOT")
+    implementation("io.github.icyoung:log4agent:0.1.0")
 }
 ```
 
@@ -149,7 +142,7 @@ repositories {
 }
 
 commonMain.dependencies {
-    implementation("dev.log4agent:log4agent:0.1.0-SNAPSHOT")
+    implementation("io.github.icyoung:log4agent:0.1.0")
 }
 ```
 
@@ -193,23 +186,16 @@ Log4Agent.configure(
 
 ## Android 原生集成
 
-通过 GitHub Packages：
+通过 Maven Central：
 
 ```kotlin
 repositories {
-    maven {
-        url = uri("https://maven.pkg.github.com/OWNER/Log4Agent")
-        credentials {
-            username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR")
-            password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN")
-        }
-    }
     google()
     mavenCentral()
 }
 
 dependencies {
-    implementation("dev.log4agent:log4agent-android:0.1.0-SNAPSHOT")
+    implementation("io.github.icyoung:log4agent-android:0.1.0")
 }
 ```
 

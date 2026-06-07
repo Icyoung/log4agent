@@ -56,11 +56,11 @@ Client SDK `configure(...)` calls are idempotent in one process. Repeated calls 
 
 ## SDK Integration
 
-KMP via GitHub Packages:
+KMP via Maven Central:
 
 ```kotlin
 commonMain.dependencies {
-    implementation("dev.log4agent:log4agent:<version>")
+    implementation("io.github.icyoung:log4agent:<version>")
 }
 
 Log4Agent.configure(
@@ -74,7 +74,7 @@ Android native:
 
 ```kotlin
 dependencies {
-    implementation("dev.log4agent:log4agent-android:<version>")
+    implementation("io.github.icyoung:log4agent-android:<version>")
 }
 
 Log4Agent.configure(

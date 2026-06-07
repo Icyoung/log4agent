@@ -6,10 +6,11 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.kotlin.multiplatform.library")
     id("maven-publish")
+    id("com.vanniktech.maven.publish")
 }
 
-group = "dev.log4agent"
-version = "0.1.0-SNAPSHOT"
+group = "io.github.icyoung"
+version = "0.1.0"
 
 val ktorVersion = "3.1.3"
 val coroutinesVersion = "1.10.2"
@@ -75,18 +76,41 @@ publishing {
             }
         }
     }
+}
 
-    publications.withType<MavenPublication>().configureEach {
-        pom {
-            name.set("Log4Agent KMP")
-            description.set("Kotlin Multiplatform client for posting mobile logs to a local log4agent server.")
-            url.set("https://github.com/log4agent/log4agent")
-            licenses {
-                license {
-                    name.set("MIT")
-                    url.set("https://opensource.org/licenses/MIT")
-                }
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
+
+    coordinates(
+        groupId = "io.github.icyoung",
+        artifactId = "log4agent",
+        version = "0.1.0",
+    )
+
+    pom {
+        name.set("Log4Agent KMP")
+        description.set("Kotlin Multiplatform client for posting mobile logs to a local Log4Agent server.")
+        inceptionYear.set("2026")
+        url.set("https://github.com/Icyoung/log4agent")
+        licenses {
+            license {
+                name.set("MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+                distribution.set("repo")
             }
+        }
+        developers {
+            developer {
+                id.set("Icyoung")
+                name.set("Icy")
+                url.set("https://github.com/Icyoung")
+            }
+        }
+        scm {
+            url.set("https://github.com/Icyoung/log4agent")
+            connection.set("scm:git:https://github.com/Icyoung/log4agent.git")
+            developerConnection.set("scm:git:ssh://git@github.com/Icyoung/log4agent.git")
         }
     }
 }

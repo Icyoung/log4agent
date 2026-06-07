@@ -123,23 +123,16 @@ wants to replace the config and start a new session.
 
 ## KMP Client
 
-Use GitHub Packages:
+Use Maven Central:
 
 ```kotlin
 repositories {
-    maven {
-        url = uri("https://maven.pkg.github.com/OWNER/Log4Agent")
-        credentials {
-            username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR")
-            password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN")
-        }
-    }
     google()
     mavenCentral()
 }
 
 commonMain.dependencies {
-    implementation("dev.log4agent:log4agent:0.1.0-SNAPSHOT")
+    implementation("io.github.icyoung:log4agent:0.1.0")
 }
 ```
 
@@ -153,7 +146,7 @@ repositories {
 }
 
 commonMain.dependencies {
-    implementation("dev.log4agent:log4agent:0.1.0-SNAPSHOT")
+    implementation("io.github.icyoung:log4agent:0.1.0")
 }
 ```
 
@@ -199,23 +192,16 @@ parameters with those names.
 
 ## Android Native Client
 
-Use GitHub Packages:
+Use Maven Central:
 
 ```kotlin
 repositories {
-    maven {
-        url = uri("https://maven.pkg.github.com/OWNER/Log4Agent")
-        credentials {
-            username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR")
-            password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN")
-        }
-    }
     google()
     mavenCentral()
 }
 
 dependencies {
-    implementation("dev.log4agent:log4agent-android:0.1.0-SNAPSHOT")
+    implementation("io.github.icyoung:log4agent-android:0.1.0")
 }
 ```
 

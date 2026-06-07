@@ -1,0 +1,29 @@
+name: Publish Maven Central
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: macos-latest
+    env:
+      ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+      ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+      ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
+      ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Publish KMP to Maven Central
+        working-directory: kmp
+        run: ./gradlew :log4agent:publishAndReleaseToMavenCentral --stacktrace
+
+      - name: Publish Android to Maven Central
+        working-directory: android
+        run: ./gradlew :log4agent:publishAndReleaseToMavenCentral --stacktrace
