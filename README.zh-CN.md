@@ -2,10 +2,10 @@
 
 [English](README.md)
 
-[![KMP Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent?label=KMP%20Maven%20Central)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent)
-[![Android Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent-android-native?label=Android%20Maven%20Central)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent-android-native)
-[![Flutter pub.dev](https://img.shields.io/pub/v/log4agent?label=Flutter%20pub.dev)](https://pub.dev/packages/log4agent)
-[![npm server](https://img.shields.io/npm/v/log4agent-server?label=npm%20server)](https://www.npmjs.com/package/log4agent-server)
+[![KMP Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent?label=KMP%20Maven%20Central&color=7F52FF)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent)
+[![Android Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent-android-native?label=Android%20Maven%20Central&color=3DDC84)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent-android-native)
+[![Flutter pub.dev](https://img.shields.io/pub/v/log4agent?label=Flutter%20pub.dev&color=02569B)](https://pub.dev/packages/log4agent)
+[![npm server](https://img.shields.io/npm/v/log4agent-server?label=npm%20server&color=CB3837)](https://www.npmjs.com/package/log4agent-server)
 
 Log4Agent 是一个给移动端调试和 coding agent 使用的本机日志工具。移动端 SDK 把结构化日志发到开发机上的本地 server，server 按设备和 session 存成 JSONL，agent 可以直接在终端查看 Android、iOS、Flutter、KMP 的运行日志。
 

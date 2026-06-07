@@ -2,10 +2,10 @@
 
 [中文文档](README.zh-CN.md)
 
-[![KMP Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent?label=KMP%20Maven%20Central)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent)
-[![Android Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent-android-native?label=Android%20Maven%20Central)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent-android-native)
-[![Flutter pub.dev](https://img.shields.io/pub/v/log4agent?label=Flutter%20pub.dev)](https://pub.dev/packages/log4agent)
-[![npm server](https://img.shields.io/npm/v/log4agent-server?label=npm%20server)](https://www.npmjs.com/package/log4agent-server)
+[![KMP Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent?label=KMP%20Maven%20Central&color=7F52FF)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent)
+[![Android Maven Central](https://img.shields.io/maven-central/v/io.github.icyoung/log4agent-android-native?label=Android%20Maven%20Central&color=3DDC84)](https://central.sonatype.com/artifact/io.github.icyoung/log4agent-android-native)
+[![Flutter pub.dev](https://img.shields.io/pub/v/log4agent?label=Flutter%20pub.dev&color=02569B)](https://pub.dev/packages/log4agent)
+[![npm server](https://img.shields.io/npm/v/log4agent-server?label=npm%20server&color=CB3837)](https://www.npmjs.com/package/log4agent-server)
 
 Log4Agent is a local logging toolkit for mobile debugging and coding agents. Mobile SDKs send structured logs to a local server on the developer machine; the server stores JSONL logs by device and session so agents can inspect Android, iOS, Flutter, and KMP runtime logs directly from the terminal.
 
